@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FacultyCreateRequest {
+public class FacultySaveRequest {
 
     @NotNull
     private Long id;

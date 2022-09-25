@@ -1,0 +1,12 @@
+package com.company.qualification.port;
+
+import com.company.qualification.model.Qualification;
+import com.company.qualification.usecase.DeleteQualification;
+import com.company.qualification.usecase.RetrieveQualification;
+import com.company.qualification.usecase.SaveQualification;
+
+public interface QualificationPort {
+    Qualification saveQualification(SaveQualification saveQualification);
+    Qualification retrieveQualification(RetrieveQualification retrieveQualification) throws Exception;
+    Qualification deleteQualification(DeleteQualification deleteQualification) throws Exception;
+}
