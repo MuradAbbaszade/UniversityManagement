@@ -9,5 +9,5 @@ import lombok.Data;
 public class Qualification {
     private Long id;
     private String name;
-    private Long facultyId;
+    private Faculty faculty;
 }

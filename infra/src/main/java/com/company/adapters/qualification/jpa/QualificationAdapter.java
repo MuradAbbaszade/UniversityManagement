@@ -51,8 +51,10 @@ public class QualificationAdapter implements QualificationPort {
         FacultyEntity facultyEntity = new FacultyEntity();
         facultyEntity.setId(faculty.getId());
         facultyEntity.setName(faculty.getName());
-        List<QualificationEntity> qualificationEntityList = facultyEntity.getQualificationEntityList();
+        List<QualificationEntity> qualificationEntityList = qualificationJpaRepository.getQualificationList(facultyEntity.getId());
         facultyEntity.setQualificationEntityList(qualificationEntityList);
         return facultyEntity;
     }
+
+
 }
