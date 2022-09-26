@@ -6,7 +6,7 @@ import com.company.subject.usecase.RetrieveSubject;
 import com.company.subject.usecase.SaveSubject;
 
 public interface SubjectPort {
-    Subject retrieve(RetrieveSubject retrieveSubject);
-    Subject delete(DeleteSubject deleteSubject);
+    Subject retrieve(RetrieveSubject retrieveSubject) throws Exception;
+    Subject delete(DeleteSubject deleteSubject) throws Exception;
     Subject save(SaveSubject saveSubject);
 }

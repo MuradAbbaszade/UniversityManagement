@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-    public class SaveSubjectUseCaseHandler implements UseCaseHandler<Subject, SaveSubject> {
+    public class SubjectSaveUseCaseHandler implements UseCaseHandler<Subject, SaveSubject> {
 
     private final SubjectPort subjectPort;
 

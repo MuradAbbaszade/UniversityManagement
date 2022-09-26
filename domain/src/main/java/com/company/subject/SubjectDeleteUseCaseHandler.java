@@ -13,9 +13,10 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class DeleteSubjectUseCaseHandler implements UseCaseHandler<Subject, DeleteSubject> {
+public class SubjectDeleteUseCaseHandler implements UseCaseHandler<Subject, DeleteSubject> {
 
     private final SubjectPort subjectPort;
+
     @Override
     public Subject handle(DeleteSubject useCase) throws Exception {
         return subjectPort.delete(useCase);

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class RetrieveSubjectUseCaseHandler implements UseCaseHandler<Subject, RetrieveSubject> {
+public class SubjectRetrieveUseCaseHandler implements UseCaseHandler<Subject, RetrieveSubject> {
 
     private final SubjectPort subjectPort;
     @Override

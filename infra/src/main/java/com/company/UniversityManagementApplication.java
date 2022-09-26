@@ -40,7 +40,6 @@ public class UniversityManagementApplication {
         CommandLineRunner clr = new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                groupAdapter.save(SaveGroup.builder().id(new Long(1)).name("691.21").year(2).qualification(qualificationJpaRepository.findById(new Long(1)).get().toModel()).build());
             }
 
         };

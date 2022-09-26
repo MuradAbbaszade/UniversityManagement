@@ -8,10 +8,7 @@ import com.company.group.usecase.RetrieveGroup;
 import com.company.group.usecase.SaveGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/admin/group")
 @RestController
@@ -26,13 +23,13 @@ public class GroupAdminController {
     @Autowired
     UseCaseHandler<Group, RetrieveGroup> retrieveGroupUseCaseHandler;
 
-    @PostMapping("/delete")
-    public ResponseEntity<Group> delete(Long id) throws Exception {
+    @PostMapping("delete")
+    public ResponseEntity<Group> delete(@RequestParam Long id) throws Exception {
         Group group = retrieveGroupUseCaseHandler.handle(RetrieveGroup.builder().id(id).build());
         deleteGroupUseCaseHandler.handle(DeleteGroup.builder().id(id).build());
         return ResponseEntity.ok(group);
     }
-    @PostMapping("/save")
+    @PostMapping("save")
     public ResponseEntity<Group> save(@RequestBody GroupSaveRequest groupSaveRequest) throws Exception {
         return ResponseEntity.ok(saveGroupUseCaseHandler.handle(groupSaveRequest.toUseCase()));
     }
