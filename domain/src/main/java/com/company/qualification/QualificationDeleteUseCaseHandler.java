@@ -14,6 +14,6 @@ public class QualificationDeleteUseCaseHandler implements UseCaseHandler<Qualifi
     private final QualificationPort qualificationPort;
     @Override
     public Qualification handle(DeleteQualification useCase) throws Exception {
-        return qualificationPort.deleteQualification(useCase);
+        return qualificationPort.delete(useCase);
     }
 }

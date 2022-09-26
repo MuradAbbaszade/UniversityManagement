@@ -15,6 +15,6 @@ public class FacultyDeleteUseCaseHandler implements UseCaseHandler<Faculty,Delet
 
     @Override
     public Faculty handle(DeleteFaculty useCase) throws Exception {
-        return facultyPort.deleteFaculty(useCase);
+        return facultyPort.delete(useCase);
     }
 }

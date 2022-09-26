@@ -2,6 +2,7 @@ package com.company.adapters.faculty.jpa;
 
 import com.company.adapters.faculty.jpa.entity.FacultyEntity;
 import com.company.adapters.faculty.jpa.repository.FacultyJpaRepository;
+import com.company.adapters.qualification.jpa.repository.QualificationJpaRepository;
 import com.company.faculty.model.Faculty;
 import com.company.faculty.port.FacultyPort;
 import com.company.faculty.usecase.DeleteFaculty;
@@ -15,17 +16,20 @@ import org.springframework.stereotype.Service;
 public class FacultyAdapter implements FacultyPort {
 
     private final FacultyJpaRepository facultyJpaRepository;
+    private final QualificationJpaRepository qualificationJpaRepository;
 
     @Override
-    public Faculty saveFaculty(SaveFaculty saveFaculty) {
+    public Faculty save(SaveFaculty saveFaculty) {
         FacultyEntity facultyEntity = new FacultyEntity();
         facultyEntity.setId(saveFaculty.getId());
         facultyEntity.setName(saveFaculty.getName());
+        facultyEntity.setQualificationEntityList(
+                qualificationJpaRepository.getQualificationList(saveFaculty.getId()));
         return facultyJpaRepository.save(facultyEntity).toModel();
     }
 
     @Override
-    public Faculty deleteFaculty(DeleteFaculty deleteFaculty) throws Exception {
+    public Faculty delete(DeleteFaculty deleteFaculty) throws Exception {
         Faculty faculty = facultyJpaRepository.findById(deleteFaculty.getId())
                 .map(FacultyEntity::toModel)
                 .orElseThrow(() -> new Exception("Faculty not found"));

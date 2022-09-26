@@ -2,13 +2,12 @@ package com.company;
 
 import com.company.adapters.faculty.jpa.FacultyAdapter;
 import com.company.adapters.faculty.jpa.repository.FacultyJpaRepository;
+import com.company.adapters.group.jpa.GroupAdapter;
+import com.company.adapters.group.jpa.repository.GroupJpaRepository;
 import com.company.adapters.qualification.jpa.QualificationAdapter;
-import com.company.faculty.model.Faculty;
-import com.company.faculty.usecase.RetrieveFaculty;
-import com.company.faculty.usecase.SaveFaculty;
-import com.company.qualification.usecase.RetrieveQualification;
-import com.company.qualification.usecase.SaveQualification;
-import lombok.RequiredArgsConstructor;
+import com.company.adapters.qualification.jpa.repository.QualificationJpaRepository;
+import com.company.adapters.role.jpa.repository.RoleJpaRepository;
+import com.company.group.usecase.SaveGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,14 +24,23 @@ public class UniversityManagementApplication {
     FacultyJpaRepository facultyJpaRepository;
 
     @Autowired
+    RoleJpaRepository roleJpaRepository;
+
+    @Autowired
+    QualificationJpaRepository qualificationJpaRepository;
+
+    @Autowired
     QualificationAdapter qualificationAdapter;
+
+    @Autowired
+    GroupAdapter groupAdapter;
 
     @Bean
     public CommandLineRunner run() {
         CommandLineRunner clr = new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-
+                groupAdapter.save(SaveGroup.builder().id(new Long(1)).name("691.21").year(2).qualification(qualificationJpaRepository.findById(new Long(1)).get().toModel()).build());
             }
 
         };

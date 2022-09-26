@@ -1,6 +1,5 @@
 package com.company.qualification.model;
 
-import com.company.faculty.model.Faculty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,5 +8,5 @@ import lombok.Data;
 public class Qualification {
     private Long id;
     private String name;
-    private Faculty faculty;
+    private Long facultyId;
 }

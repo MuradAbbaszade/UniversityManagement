@@ -1,6 +1,7 @@
 package com.company.adapters.qualification.jpa;
 
 import com.company.adapters.faculty.jpa.entity.FacultyEntity;
+import com.company.adapters.faculty.jpa.repository.FacultyJpaRepository;
 import com.company.adapters.qualification.jpa.entity.QualificationEntity;
 import com.company.adapters.qualification.jpa.repository.QualificationJpaRepository;
 import com.company.faculty.model.Faculty;
@@ -19,42 +20,33 @@ import java.util.List;
 public class QualificationAdapter implements QualificationPort {
 
     private final QualificationJpaRepository qualificationJpaRepository;
+    private final FacultyJpaRepository facultyJpaRepository;
 
     @Override
-    public Qualification saveQualification(SaveQualification saveQualification) {
+    public Qualification save(SaveQualification saveQualification) {
         QualificationEntity qualificationEntity = new QualificationEntity();
         qualificationEntity.setId(saveQualification.getId());
         qualificationEntity.setName(saveQualification.getName());
         Faculty faculty = saveQualification.getFaculty();
-        FacultyEntity facultyEntity = toEntity(saveQualification.getFaculty());
+        FacultyEntity facultyEntity = facultyJpaRepository.findById(faculty.getId()).get();
         qualificationEntity.setFacultyEntity(facultyEntity);
         return qualificationJpaRepository.save(qualificationEntity).toModel();
     }
 
     @Override
-    public Qualification retrieveQualification(RetrieveQualification retrieveQualification) throws Exception {
+    public Qualification retrieve(RetrieveQualification retrieveQualification) throws Exception {
         return qualificationJpaRepository.findById(retrieveQualification.getId())
                 .map(QualificationEntity::toModel)
                 .orElseThrow(() -> new Exception("Qualification not found"));
     }
 
     @Override
-    public Qualification deleteQualification(DeleteQualification deleteQualification) throws Exception {
+    public Qualification delete(DeleteQualification deleteQualification) throws Exception {
         Qualification qualification = qualificationJpaRepository.findById(deleteQualification.getId())
                 .map(QualificationEntity::toModel)
                 .orElseThrow(() -> new Exception("Qualification not found"));
         qualificationJpaRepository.deleteById(deleteQualification.getId());
         return qualification;
     }
-
-    public FacultyEntity toEntity(Faculty faculty){
-        FacultyEntity facultyEntity = new FacultyEntity();
-        facultyEntity.setId(faculty.getId());
-        facultyEntity.setName(faculty.getName());
-        List<QualificationEntity> qualificationEntityList = qualificationJpaRepository.getQualificationList(facultyEntity.getId());
-        facultyEntity.setQualificationEntityList(qualificationEntityList);
-        return facultyEntity;
-    }
-
 
 }

@@ -5,12 +5,14 @@ import com.company.common.entity.AbstractEntity;
 import com.company.group.model.Group;
 import com.company.qualification.model.Qualification;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="group")
+@Table(name="group",schema = "public")
+@ToString
 public class GroupEntity extends AbstractEntity {
     @Column(name="name")
     private String name;

@@ -1,6 +1,5 @@
 package com.company.adapters.qualification.jpa.repository;
 
-import com.company.adapters.faculty.jpa.entity.FacultyEntity;
 import com.company.adapters.qualification.jpa.entity.QualificationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

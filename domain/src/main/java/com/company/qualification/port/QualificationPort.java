@@ -6,7 +6,7 @@ import com.company.qualification.usecase.RetrieveQualification;
 import com.company.qualification.usecase.SaveQualification;
 
 public interface QualificationPort {
-    Qualification saveQualification(SaveQualification saveQualification);
-    Qualification retrieveQualification(RetrieveQualification retrieveQualification) throws Exception;
-    Qualification deleteQualification(DeleteQualification deleteQualification) throws Exception;
+    Qualification save(SaveQualification saveQualification);
+    Qualification retrieve(RetrieveQualification retrieveQualification) throws Exception;
+    Qualification delete(DeleteQualification deleteQualification) throws Exception;
 }

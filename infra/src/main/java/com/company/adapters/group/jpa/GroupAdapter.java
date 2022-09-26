@@ -1,9 +1,9 @@
 package com.company.adapters.group.jpa;
 
-import com.company.adapters.faculty.jpa.repository.FacultyJpaRepository;
 import com.company.adapters.group.jpa.entity.GroupEntity;
 import com.company.adapters.group.jpa.repository.GroupJpaRepository;
 import com.company.adapters.qualification.jpa.entity.QualificationEntity;
+import com.company.adapters.qualification.jpa.repository.QualificationJpaRepository;
 import com.company.group.model.Group;
 import com.company.group.port.GroupPort;
 import com.company.group.usecase.DeleteGroup;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class GroupAdapter implements GroupPort {
 
     private final GroupJpaRepository groupJpaRepository;
-    private final FacultyJpaRepository facultyJpaRepository;
+    private final QualificationJpaRepository qualificationJpaRepository;
 
     @Override
     public Group retrieve(RetrieveGroup retrieveGroup) throws Exception {
@@ -43,17 +43,8 @@ public class GroupAdapter implements GroupPort {
         groupEntity.setName(saveGroup.getName());
         groupEntity.setYear(saveGroup.getYear());
         Qualification qualification = saveGroup.getQualification();
-        QualificationEntity qualificationEntity = toEntity(qualification);
+        QualificationEntity qualificationEntity = qualificationJpaRepository.findById(qualification.getId()).get();
         groupEntity.setQualificationEntity(qualificationEntity);
         return groupJpaRepository.save(groupEntity).toModel();
-    }
-
-    public QualificationEntity toEntity(Qualification qualification){
-        QualificationEntity qualificationEntity = new QualificationEntity();
-        qualificationEntity.setId(qualification.getId());
-        qualificationEntity.setName(qualification.getName());
-        qualificationEntity.setFacultyEntity(
-                facultyJpaRepository.findById(qualification.getFaculty().getId()).get());
-        return qualificationEntity;
     }
 }

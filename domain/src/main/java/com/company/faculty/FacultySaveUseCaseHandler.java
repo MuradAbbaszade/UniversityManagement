@@ -14,6 +14,6 @@ public class FacultySaveUseCaseHandler implements UseCaseHandler<Faculty, SaveFa
     private final FacultyPort facultyPort;
     @Override
     public Faculty handle(SaveFaculty useCase) {
-        return facultyPort.saveFaculty(useCase);
+        return facultyPort.save(useCase);
     }
 }

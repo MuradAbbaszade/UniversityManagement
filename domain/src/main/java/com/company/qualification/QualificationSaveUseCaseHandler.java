@@ -14,6 +14,6 @@ public class QualificationSaveUseCaseHandler implements UseCaseHandler<Qualifica
     private final QualificationPort qualificationPort;
     @Override
     public Qualification handle(SaveQualification useCase) throws Exception {
-        return qualificationPort.saveQualification(useCase);
+        return qualificationPort.save(useCase);
     }
 }

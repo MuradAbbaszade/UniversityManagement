@@ -17,8 +17,8 @@ import static javax.persistence.FetchType.EAGER;
 public class QualificationEntity extends AbstractEntity {
     @Column(name="name")
     private String name;
-    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
     @ManyToOne
+    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
     private FacultyEntity facultyEntity;
     @OneToMany(mappedBy = "qualificationEntity",fetch=EAGER)
     private List<GroupEntity> groupEntityList;
@@ -27,7 +27,10 @@ public class QualificationEntity extends AbstractEntity {
         return Qualification.builder()
                 .id(super.getId())
                 .name(name)
-                .faculty(facultyEntity.toModel())
+                .facultyId(facultyEntity.getId())
                 .build();
+    }
+    public String toString(){
+        return "id="+super.getId()+",name="+name;
     }
 }
