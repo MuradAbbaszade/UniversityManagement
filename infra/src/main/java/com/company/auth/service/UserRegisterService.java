@@ -1,4 +1,4 @@
-package com.company.common.service;
+package com.company.auth.service;
 import com.company.student.StudentSaveUseCaseHandler;
 import com.company.student.model.Student;
 import com.company.student.usecase.SaveStudent;

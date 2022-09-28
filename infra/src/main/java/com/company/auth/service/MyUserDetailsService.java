@@ -1,4 +1,4 @@
-package com.company.common.service;
+package com.company.auth.service;
 
 import com.company.common.usecase.UseCaseHandler;
 import javax.transaction.Transactional;

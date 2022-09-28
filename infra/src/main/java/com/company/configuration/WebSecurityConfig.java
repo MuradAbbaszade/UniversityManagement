@@ -1,6 +1,6 @@
 package com.company.configuration;
 
-import com.company.common.service.MyUserDetailsService;
+import com.company.auth.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
