@@ -7,6 +7,7 @@ import com.company.student.usecase.SaveStudent;
 
 public interface StudentPort {
     Student retrieve(RetrieveStudent retrieveStudent) throws Exception;
+    Student retrieveByEmail(RetrieveStudent retrieveStudent) throws Exception;
     Student delete(DeleteStudent deleteStudent) throws Exception;
     Student save(SaveStudent saveStudent);
 }

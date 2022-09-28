@@ -8,4 +8,5 @@ import lombok.Data;
 @Builder
 public class RetrieveTeacher implements UseCase {
     private Long id;
+    private String email;
 }

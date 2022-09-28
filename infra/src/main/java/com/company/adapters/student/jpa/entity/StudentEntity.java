@@ -17,6 +17,10 @@ public class StudentEntity extends AbstractEntity {
     private String surname;
     @Column(name="acceptance_point")
     private Integer acceptancePoint;
+    @Column(name="email")
+    private String email;
+    @Column(name="password")
+    private String password;
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "id")
     private GroupEntity groupEntity;
@@ -28,6 +32,8 @@ public class StudentEntity extends AbstractEntity {
                 .surname(surname)
                 .acceptencePoint(acceptancePoint)
                 .groupId(groupEntity.getId())
+                .email(email)
+                .password(password)
                 .build();
     }
 }

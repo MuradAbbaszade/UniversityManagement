@@ -23,6 +23,13 @@ public class TeacherAdapter implements TeacherPort {
     }
 
     @Override
+    public Teacher retrieveByEmail(RetrieveTeacher retrieveTeacher) throws Exception {
+        return teacherJpaRepository.findByEmail(retrieveTeacher.getEmail())
+                .map(TeacherEntity::toModel)
+                .orElseThrow(()->new Exception("Teacher not found"));
+    }
+
+    @Override
     public Teacher delete(DeleteTeacher deleteTeacher) throws Exception {
         Teacher teacher = teacherJpaRepository.findById(deleteTeacher.getId())
                 .map(TeacherEntity::toModel)

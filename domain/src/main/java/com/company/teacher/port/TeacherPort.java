@@ -7,6 +7,7 @@ import com.company.teacher.usecase.SaveTeacher;
 
 public interface TeacherPort {
     Teacher retrieve(RetrieveTeacher retrieveTeacher) throws Exception;
+    Teacher retrieveByEmail(RetrieveTeacher retrieveTeacher) throws Exception;
     Teacher delete(DeleteTeacher deleteTeacher) throws Exception;
     Teacher save(SaveTeacher saveTeacher);
 }

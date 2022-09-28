@@ -10,4 +10,6 @@ public class SaveTeacher implements UseCase {
     private Long id;
     private String name;
     private String surname;
+    private String email;
+    private String password;
 }

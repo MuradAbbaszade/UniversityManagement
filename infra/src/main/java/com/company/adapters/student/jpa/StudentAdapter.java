@@ -25,6 +25,13 @@ public class StudentAdapter implements StudentPort {
     }
 
     @Override
+    public Student retrieveByEmail(RetrieveStudent retrieveStudent) throws Exception {
+        return studentJpaRepository.findByEmail(retrieveStudent.getEmail())
+                .map(StudentEntity::toModel)
+                .orElseThrow(() -> new Exception("Student not found"));
+    }
+
+    @Override
     public Student delete(DeleteStudent deleteStudent) throws Exception {
         Student student = studentJpaRepository.findById(deleteStudent.getId())
                 .map(StudentEntity::toModel)
@@ -42,6 +49,8 @@ public class StudentAdapter implements StudentPort {
         studentEntity.setAcceptancePoint(saveStudent.getAcceptencePoint());
         studentEntity.setGroupEntity(
                 groupJpaRepository.findById(saveStudent.getGroupId()).get());
+        studentEntity.setEmail(saveStudent.getEmail());
+        studentEntity.setPassword(saveStudent.getPassword());
         return studentEntity.toModel();
     }
 }
