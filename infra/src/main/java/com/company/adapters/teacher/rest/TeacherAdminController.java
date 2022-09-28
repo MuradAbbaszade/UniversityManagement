@@ -7,6 +7,7 @@ import com.company.teacher.usecase.DeleteTeacher;
 import com.company.teacher.usecase.RetrieveTeacher;
 import com.company.teacher.usecase.SaveTeacher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,6 +18,7 @@ public class TeacherAdminController {
     UseCaseHandler<Teacher, SaveTeacher> saveTeacherUseCaseHandler;
     @Autowired
     UseCaseHandler<Teacher, DeleteTeacher> deleteTeacherUseCaseHandler;
+    @Qualifier("byIdTeacher")
     @Autowired
     UseCaseHandler<Teacher, RetrieveTeacher> retrieveTeacherUseCaseHandler;
 

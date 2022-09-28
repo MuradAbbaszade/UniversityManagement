@@ -7,7 +7,7 @@ import com.company.teacher.usecase.RetrieveTeacher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("byIdTeacher")
 @RequiredArgsConstructor
 public class TeacherRetrieveUseCaseHandler implements UseCaseHandler<Teacher, RetrieveTeacher> {
 

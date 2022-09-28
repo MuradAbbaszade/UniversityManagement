@@ -7,6 +7,7 @@ import com.company.student.usecase.DeleteStudent;
 import com.company.student.usecase.RetrieveStudent;
 import com.company.student.usecase.SaveStudent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ public class StudentAdminController {
     @Autowired
     UseCaseHandler<Student, DeleteStudent> deleteStudentUseCaseHandler;
 
+    @Qualifier("byIdStudent")
     @Autowired
     UseCaseHandler<Student, RetrieveStudent> retrieveStudentUseCaseHandler;
 

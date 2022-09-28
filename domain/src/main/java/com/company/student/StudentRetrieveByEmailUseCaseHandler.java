@@ -7,7 +7,7 @@ import com.company.student.usecase.RetrieveStudent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("byEmailStudent")
 @RequiredArgsConstructor
 public class StudentRetrieveByEmailUseCaseHandler implements UseCaseHandler<Student, RetrieveStudent> {
 

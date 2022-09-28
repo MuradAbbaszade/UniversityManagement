@@ -8,6 +8,7 @@ import com.company.student.usecase.RetrieveStudent;
 import com.company.teacher.model.Teacher;
 import com.company.teacher.usecase.RetrieveTeacher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,8 +20,10 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class MyUserDetailsService implements UserDetailsService {
 
+    @Qualifier("byEmailStudent")
     @Autowired
     private UseCaseHandler<Student, RetrieveStudent> retrieveStudentUseCaseHandler;
+    @Qualifier("byEmailTeacher")
     @Autowired
     private UseCaseHandler<Teacher, RetrieveTeacher> retrieveTeacherUseCaseHandler;
 

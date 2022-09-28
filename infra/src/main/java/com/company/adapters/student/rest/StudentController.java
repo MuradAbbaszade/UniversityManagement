@@ -4,6 +4,7 @@ import com.company.common.usecase.UseCaseHandler;
 import com.company.student.model.Student;
 import com.company.student.usecase.RetrieveStudent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StudentController {
 
+    @Qualifier("byIdStudent")
     @Autowired
     UseCaseHandler<Student, RetrieveStudent> retrieveStudentUseCaseHandler;
 
