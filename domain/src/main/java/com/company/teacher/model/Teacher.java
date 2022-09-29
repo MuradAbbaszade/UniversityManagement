@@ -11,4 +11,5 @@ public class Teacher {
     private String surname;
     private String email;
     private String password;
+    private Long roleId;
 }

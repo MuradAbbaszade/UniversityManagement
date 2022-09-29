@@ -19,12 +19,10 @@ public class GroupEntity extends AbstractEntity {
     private String name;
     @Column(name="year")
     private Integer year;
-
     @ManyToOne
     @JoinColumn(name = "qualification_id", referencedColumnName = "id")
     private QualificationEntity qualificationEntity;
-
-    @OneToMany(mappedBy = "groupEntity",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "groupEntity", fetch = FetchType.EAGER)
     private List<StudentEntity> studentEntityList;
 
     public Group toModel(){

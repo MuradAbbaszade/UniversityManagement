@@ -1,6 +1,7 @@
 package com.company.adapters.student.jpa;
 
 import com.company.adapters.group.jpa.repository.GroupJpaRepository;
+import com.company.adapters.role.jpa.repository.RoleJpaRepository;
 import com.company.adapters.student.jpa.entity.StudentEntity;
 import com.company.adapters.student.jpa.repository.StudentJpaRepository;
 import com.company.student.model.Student;
@@ -9,6 +10,9 @@ import com.company.student.usecase.DeleteStudent;
 import com.company.student.usecase.RetrieveStudent;
 import com.company.student.usecase.SaveStudent;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +21,7 @@ public class StudentAdapter implements StudentPort {
 
     private final StudentJpaRepository studentJpaRepository;
     private final GroupJpaRepository groupJpaRepository;
+    private final RoleJpaRepository roleJpaRepository;
     @Override
     public Student retrieve(RetrieveStudent retrieveStudent) throws Exception {
         return studentJpaRepository.findById(retrieveStudent.getId())
@@ -50,7 +55,14 @@ public class StudentAdapter implements StudentPort {
         studentEntity.setGroupEntity(
                 groupJpaRepository.findById(saveStudent.getGroupId()).get());
         studentEntity.setEmail(saveStudent.getEmail());
-        studentEntity.setPassword(saveStudent.getPassword());
+        studentEntity.setPassword(passwordEncoder().encode(saveStudent.getPassword()));
+        studentEntity.setRoleEntity(
+                roleJpaRepository.findById(saveStudent.getRoleId()).get());
+        studentJpaRepository.save(studentEntity);
         return studentEntity.toModel();
+    }
+
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 }

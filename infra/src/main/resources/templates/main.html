@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+Your Profile:
+<div th:if="${loggedInUser.roleId == 2}">
+<label>Name</label>
+<input th:text="${loggedInUser.name}">
+<label>Surname</label>
+<input th:text="${loggedInUser.surname}">
+<label>Email</label>
+<input th:text="${loggedInUser.email}">
+<label>Acceptance Point</label>
+<input th:text="${loggedInUser.acceptancePoint}">
+<label>Group</label>
+<input th:text="${loggedInUser.groupId}">
+</div>
+<div th:if="${loggedInUser.roleId == 3}">
+    <label>Name</label>
+    <input th:text="${loggedInUser.name}">
+    <label>Surname</label>
+    <input th:text="${loggedInUser.surname}">
+    <label>Email</label>
+    <input th:text="${loggedInUser.email}">
+</div>
+</body>
+</html>

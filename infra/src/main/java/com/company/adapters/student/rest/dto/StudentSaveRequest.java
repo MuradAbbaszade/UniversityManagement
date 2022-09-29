@@ -19,6 +19,8 @@ public class StudentSaveRequest {
     private Integer acceptancePoint;
     @NotNull
     private Long groupId;
+    @NotNull
+    private Long roleId;
 
     public SaveStudent toUseCase(){
         return SaveStudent.builder()

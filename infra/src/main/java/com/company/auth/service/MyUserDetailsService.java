@@ -30,6 +30,7 @@ public class MyUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         try{
+            System.out.println(email);
             Student student = retrieveStudentUseCaseHandler.handle(
                 RetrieveStudent.builder().email(email).build());
             UserBuilder builder = User.withUsername(email);

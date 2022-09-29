@@ -1,6 +1,7 @@
 package com.company.adapters.student.jpa.entity;
 
 import com.company.adapters.group.jpa.entity.GroupEntity;
+import com.company.adapters.role.jpa.entity.RoleEntity;
 import com.company.common.entity.AbstractEntity;
 import com.company.student.model.Student;
 import lombok.Data;
@@ -24,6 +25,9 @@ public class StudentEntity extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "id")
     private GroupEntity groupEntity;
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private RoleEntity roleEntity;
 
     public Student toModel(){
         return Student.builder()
@@ -32,6 +36,7 @@ public class StudentEntity extends AbstractEntity {
                 .surname(surname)
                 .acceptencePoint(acceptancePoint)
                 .groupId(groupEntity.getId())
+                .roleId(roleEntity.getId())
                 .email(email)
                 .password(password)
                 .build();

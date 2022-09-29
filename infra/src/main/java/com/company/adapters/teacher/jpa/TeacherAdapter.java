@@ -1,5 +1,6 @@
 package com.company.adapters.teacher.jpa;
 
+import com.company.adapters.role.jpa.repository.RoleJpaRepository;
 import com.company.adapters.teacher.jpa.entity.TeacherEntity;
 import com.company.adapters.teacher.jpa.repository.TeacherJpaRepository;
 import com.company.teacher.model.Teacher;
@@ -8,6 +9,8 @@ import com.company.teacher.usecase.DeleteTeacher;
 import com.company.teacher.usecase.RetrieveTeacher;
 import com.company.teacher.usecase.SaveTeacher;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class TeacherAdapter implements TeacherPort {
 
     private final TeacherJpaRepository teacherJpaRepository;
+    private final RoleJpaRepository roleJpaRepository;
     @Override
     public Teacher retrieve(RetrieveTeacher retrieveTeacher) throws Exception {
         return teacherJpaRepository.findById(retrieveTeacher.getId())
@@ -44,6 +48,13 @@ public class TeacherAdapter implements TeacherPort {
         teacherEntity.setId(saveTeacher.getId());
         teacherEntity.setName(saveTeacher.getName());
         teacherEntity.setSurname(saveTeacher.getSurname());
+        teacherEntity.setEmail(saveTeacher.getEmail());
+        teacherEntity.setPassword(passwordEncoder().encode(saveTeacher.getPassword()));
+        teacherEntity.setRoleEntity(roleJpaRepository.findById(saveTeacher.getRoleId()).get());
         return teacherJpaRepository.save(teacherEntity).toModel();
+    }
+
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 }

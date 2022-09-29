@@ -13,4 +13,5 @@ public class Student {
     private String password;
     private Integer acceptencePoint;
     private Long groupId;
+    private Long roleId;
 }
