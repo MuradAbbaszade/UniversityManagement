@@ -12,7 +12,7 @@ public class SaveStudent implements UseCase {
     private String surname;
     private String email;
     private String password;
-    private Integer acceptencePoint;
+    private Integer acceptancePoint;
     private Long groupId;
     private Long roleId;
 }

@@ -27,7 +27,7 @@ public class StudentSaveRequest {
                 .id(id)
                 .name(name)
                 .surname(surname)
-                .acceptencePoint(acceptancePoint)
+                .acceptancePoint(acceptancePoint)
                 .groupId(groupId)
                 .build();
     }

@@ -1,8 +1,10 @@
 package com.company.adapters.teacher.jpa;
 
 import com.company.adapters.role.jpa.repository.RoleJpaRepository;
+import com.company.adapters.student.jpa.entity.StudentEntity;
 import com.company.adapters.teacher.jpa.entity.TeacherEntity;
 import com.company.adapters.teacher.jpa.repository.TeacherJpaRepository;
+import com.company.student.model.Student;
 import com.company.teacher.model.Teacher;
 import com.company.teacher.port.TeacherPort;
 import com.company.teacher.usecase.DeleteTeacher;
@@ -12,6 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -27,10 +33,18 @@ public class TeacherAdapter implements TeacherPort {
     }
 
     @Override
-    public Teacher retrieveByEmail(RetrieveTeacher retrieveTeacher) throws Exception {
-        return teacherJpaRepository.findByEmail(retrieveTeacher.getEmail())
-                .map(TeacherEntity::toModel)
-                .orElseThrow(()->new Exception("Teacher not found"));
+    public List<Teacher> retrieveByEmail(RetrieveTeacher retrieveTeacher) throws Exception {
+        if(retrieveTeacher.getEmail()!=null && !(retrieveTeacher.getEmail().isEmpty())) {
+            return Arrays.asList(teacherJpaRepository.findByEmail(retrieveTeacher.getEmail())
+                    .map(TeacherEntity::toModel)
+                    .orElseThrow(() -> new Exception("Teacher not found")));
+        }
+        List<TeacherEntity> teacherEntities = teacherJpaRepository.findAll();
+        List<Teacher> teachers = new ArrayList<>();
+        for(TeacherEntity teacherEntity : teacherEntities){
+            teachers.add(teacherEntity.toModel());
+        }
+        return teachers;
     }
 
     @Override

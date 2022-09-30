@@ -5,9 +5,11 @@ import com.company.teacher.usecase.DeleteTeacher;
 import com.company.teacher.usecase.RetrieveTeacher;
 import com.company.teacher.usecase.SaveTeacher;
 
+import java.util.List;
+
 public interface TeacherPort {
     Teacher retrieve(RetrieveTeacher retrieveTeacher) throws Exception;
-    Teacher retrieveByEmail(RetrieveTeacher retrieveTeacher) throws Exception;
+    List<Teacher> retrieveByEmail(RetrieveTeacher retrieveTeacher) throws Exception;
     Teacher delete(DeleteTeacher deleteTeacher) throws Exception;
     Teacher save(SaveTeacher saveTeacher);
 }

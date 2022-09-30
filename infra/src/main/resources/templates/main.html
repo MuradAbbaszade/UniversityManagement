@@ -6,25 +6,17 @@
 </head>
 <body>
 Your Profile:
-<div th:if="${loggedInUser.roleId == 2}">
-<label>Name</label>
-<input th:text="${loggedInUser.name}">
-<label>Surname</label>
-<input th:text="${loggedInUser.surname}">
-<label>Email</label>
-<input th:text="${loggedInUser.email}">
-<label>Acceptance Point</label>
-<input th:text="${loggedInUser.acceptancePoint}">
-<label>Group</label>
-<input th:text="${loggedInUser.groupId}">
+<div th:if="${loggedInUser.role.name == 'STUDENT'}">
+    <p th:text="${loggedInUser.name}"></p>
+    <p th:text="${loggedInUser.surname}"></p>
+    <p th:text="${loggedInUser.email}"></p>
+    <p th:text="${loggedInUser.acceptancePoint}"></p>
+    <p th:text="${loggedInUser.group.name}"></p>
 </div>
-<div th:if="${loggedInUser.roleId == 3}">
-    <label>Name</label>
-    <input th:text="${loggedInUser.name}">
-    <label>Surname</label>
-    <input th:text="${loggedInUser.surname}">
-    <label>Email</label>
-    <input th:text="${loggedInUser.email}">
+<div th:if="${loggedInUser.role.name == 'TEACHER'}">
+    <p th:text="${loggedInUser.name}"></p>
+    <p th:text="${loggedInUser.surname}"></p>
+    <p th:text="${loggedInUser.email}"></p>
 </div>
 </body>
 </html>

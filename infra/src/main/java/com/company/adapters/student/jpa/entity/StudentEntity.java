@@ -34,7 +34,7 @@ public class StudentEntity extends AbstractEntity {
                 .id(super.getId())
                 .name(name)
                 .surname(surname)
-                .acceptencePoint(acceptancePoint)
+                .acceptancePoint(acceptancePoint)
                 .groupId(groupEntity.getId())
                 .roleId(roleEntity.getId())
                 .email(email)

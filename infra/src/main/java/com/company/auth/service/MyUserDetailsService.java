@@ -16,23 +16,25 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class MyUserDetailsService implements UserDetailsService {
 
     @Qualifier("byEmailStudent")
     @Autowired
-    private UseCaseHandler<Student, RetrieveStudent> retrieveStudentUseCaseHandler;
+    private UseCaseHandler<List<Student>, RetrieveStudent> retrieveStudentUseCaseHandler;
     @Qualifier("byEmailTeacher")
     @Autowired
-    private UseCaseHandler<Teacher, RetrieveTeacher> retrieveTeacherUseCaseHandler;
+    private UseCaseHandler<List<Teacher>, RetrieveTeacher> retrieveTeacherUseCaseHandler;
 
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         try{
             System.out.println(email);
             Student student = retrieveStudentUseCaseHandler.handle(
-                RetrieveStudent.builder().email(email).build());
+                RetrieveStudent.builder().email(email).build()).get(0);
             UserBuilder builder = User.withUsername(email);
             builder.disabled(false);
             builder.password(student.getPassword());
@@ -42,7 +44,7 @@ public class MyUserDetailsService implements UserDetailsService {
         catch(Exception e){
             try{
             Teacher teacher = retrieveTeacherUseCaseHandler.handle(
-                    RetrieveTeacher.builder().email(email).build());
+                    RetrieveTeacher.builder().email(email).build()).get(0);
                 UserBuilder builder = User.withUsername(email);
                 builder.disabled(false);
                 builder.password(teacher.getPassword());

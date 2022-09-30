@@ -25,9 +25,6 @@ import org.springframework.context.annotation.Bean;
 public class UniversityManagementApplication {
 
     @Autowired
-            @Qualifier("byEmailStudent")
-    private UseCaseHandler<Student, RetrieveStudent> studentRetrieveByEmailUseCaseHandler;
-    @Autowired
     private UseCaseHandler<Student, SaveStudent> studentSaveStudentUseCaseHandler;
 
     @Bean
