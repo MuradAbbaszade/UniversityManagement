@@ -73,7 +73,7 @@ public class TeacherAdapter implements TeacherPort {
 
     @Override
     public List<Teacher> retrieveBySubject(RetrieveTeacher retrieveTeacher) throws Exception {
-        SubjectEntity subjectEntity = subjectJpaRepository.findById(retrieveTeacher.getSubjectId())
+        SubjectEntity subjectEntity = subjectJpaRepository.findByName(retrieveTeacher.getSubjectName())
                     .orElseThrow(() -> new Exception("Teacher not found"));
         List<TeacherEntity> teacherEntities = subjectEntity.getTeacherEntityList();
         List<Teacher> teachers = new ArrayList<>();

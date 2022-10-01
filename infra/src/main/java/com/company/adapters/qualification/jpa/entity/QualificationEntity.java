@@ -20,7 +20,7 @@ public class QualificationEntity extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "faculty_id", referencedColumnName = "id")
     private FacultyEntity facultyEntity;
-    @OneToMany(mappedBy = "qualificationEntity",fetch=EAGER)
+    @OneToMany(mappedBy = "qualificationEntity")
     private List<GroupEntity> groupEntityList;
 
     public Qualification toModel(){

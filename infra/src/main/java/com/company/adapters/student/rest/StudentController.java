@@ -3,12 +3,10 @@ package com.company.adapters.student.rest;
 import com.company.common.usecase.UseCaseHandler;
 import com.company.student.model.Student;
 import com.company.student.usecase.RetrieveStudent;
-import org.apache.coyote.Response;
+import com.company.teacher.usecase.RetrieveTeacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +27,10 @@ public class StudentController {
     @Autowired
     UseCaseHandler<List<Student>, RetrieveStudent> retrieveByGroupUseCaseHandler;
 
+    @Qualifier("byQualificationStudent")
+    @Autowired
+    UseCaseHandler<List<Student>, RetrieveStudent> retrieveByQualificationUseCaseHandler;
+
     @GetMapping("id={id}")
     public ResponseEntity<Student> getStudentById(@PathVariable Long id) throws Exception {
         return ResponseEntity.ok(retrieveStudentUseCaseHandler.handle(
@@ -39,10 +41,15 @@ public class StudentController {
         return ResponseEntity.ok(retrieveByEmailStudentUseCaseHandler.handle(
                 RetrieveStudent.builder().email(email).build()));
     }
-    @GetMapping("groupId={groupId}")
-    public ResponseEntity<List<Student>> getStudentByGroup(@PathVariable Long groupId) throws Exception {
+    @GetMapping("groupName={groupName}")
+    public ResponseEntity<List<Student>> getStudentByGroup(@PathVariable String groupName) throws Exception {
         return ResponseEntity.ok(retrieveByGroupUseCaseHandler.handle(
-                RetrieveStudent.builder().groupId(groupId).build()));
+                RetrieveStudent.builder().groupName(groupName).build()));
+    }
+    @GetMapping("qualificationName={qualificationName}")
+    public ResponseEntity<List<Student>> getStudentByQualification(@PathVariable String qualificationName) throws Exception {
+        return ResponseEntity.ok(retrieveByQualificationUseCaseHandler.handle(
+                RetrieveStudent.builder().qualificationName(qualificationName).build()));
     }
 
 }

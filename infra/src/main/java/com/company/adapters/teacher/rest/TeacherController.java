@@ -39,9 +39,9 @@ public class TeacherController {
         return ResponseEntity.ok(retrieveByEmailTeacherUseCaseHandler.handle(
                 RetrieveTeacher.builder().email(email).build()));
     }
-    @GetMapping("subjectId={subjectId}")
-    public ResponseEntity<List<Teacher>> getTeacherByEmail(@PathVariable Long subjectId) throws Exception {
+    @GetMapping("subjectName={subjectName}")
+    public ResponseEntity<List<Teacher>> getTeacherBySubjectName(@PathVariable String subjectName) throws Exception {
         return ResponseEntity.ok(retrieveBySubjectTeacherUseCaseHandler.handle(
-                RetrieveTeacher.builder().subjectId(subjectId).build()));
+                RetrieveTeacher.builder().subjectName(subjectName).build()));
     }
 }

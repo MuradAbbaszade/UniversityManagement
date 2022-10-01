@@ -14,6 +14,4 @@ public interface TeacherJpaRepository extends JpaRepository<TeacherEntity,Long> 
     @Query(value = "select * from teacher where email=:email",nativeQuery = true)
     public Optional<TeacherEntity> findByEmail(@Param("email") String email);
 
-    /*@Query(value = "select * from teacher_subject where email=:email",nativeQuery = true)
-    public Optional<TeacherEntity> findByEmail(@Param("email") String email);*/
 }

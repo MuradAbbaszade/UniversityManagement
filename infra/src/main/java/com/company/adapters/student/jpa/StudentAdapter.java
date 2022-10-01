@@ -1,6 +1,9 @@
 package com.company.adapters.student.jpa;
 
+import com.company.adapters.group.jpa.entity.GroupEntity;
 import com.company.adapters.group.jpa.repository.GroupJpaRepository;
+import com.company.adapters.qualification.jpa.entity.QualificationEntity;
+import com.company.adapters.qualification.jpa.repository.QualificationJpaRepository;
 import com.company.adapters.role.jpa.repository.RoleJpaRepository;
 import com.company.adapters.student.jpa.entity.StudentEntity;
 import com.company.adapters.student.jpa.repository.StudentJpaRepository;
@@ -25,6 +28,7 @@ public class StudentAdapter implements StudentPort {
     private final StudentJpaRepository studentJpaRepository;
     private final GroupJpaRepository groupJpaRepository;
     private final RoleJpaRepository roleJpaRepository;
+    private final QualificationJpaRepository qualificationJpaRepository;
     @Override
     public Student retrieve(RetrieveStudent retrieveStudent) throws Exception {
         return studentJpaRepository.findById(retrieveStudent.getId())
@@ -49,8 +53,9 @@ public class StudentAdapter implements StudentPort {
 
     @Override
     public List<Student> retrieveByGroup(RetrieveStudent retrieveStudent) throws Exception {
-        if(retrieveStudent.getGroupId()!=null && !(retrieveStudent.getEmail().isEmpty())){
-            return Arrays.asList(studentJpaRepository.findByGroupId(retrieveStudent.getGroupId())
+        if(retrieveStudent.getGroupName()!=null && !(retrieveStudent.getEmail().isEmpty())){
+            return Arrays.asList(studentJpaRepository.findByGroupId(
+                    groupJpaRepository.findByName(retrieveStudent.getGroupName()).get().getId())
                     .map(StudentEntity::toModel)
                     .orElseThrow(() -> new Exception("Student not found")));
         }
@@ -58,6 +63,20 @@ public class StudentAdapter implements StudentPort {
         List<Student> students = new ArrayList<>();
         for(StudentEntity studentEntity : studentEntities){
             students.add(studentEntity.toModel());
+        }
+        return students;
+    }
+
+    @Override
+    public List<Student> retrieveByQualification(RetrieveStudent retrieveStudent) throws Exception {
+        QualificationEntity qualificationEntity = qualificationJpaRepository.
+                findByName(retrieveStudent.getQualificationName()).get();
+        List<GroupEntity> groupEntities = qualificationEntity.getGroupEntityList();
+        List<Student> students = new ArrayList<>();
+        for(GroupEntity groupEntity : groupEntities){
+            for(StudentEntity studentEntity : groupEntity.getStudentEntityList()){
+                students.add(studentEntity.toModel());
+            }
         }
         return students;
     }

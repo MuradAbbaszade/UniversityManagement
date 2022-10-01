@@ -22,7 +22,7 @@ public class GroupEntity extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "qualification_id", referencedColumnName = "id")
     private QualificationEntity qualificationEntity;
-    @OneToMany(mappedBy = "groupEntity", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "groupEntity")
     private List<StudentEntity> studentEntityList;
 
     public Group toModel(){
