@@ -25,6 +25,10 @@ public class TeacherController {
     @Autowired
     UseCaseHandler<List<Teacher>, RetrieveTeacher> retrieveByEmailTeacherUseCaseHandler;
 
+    @Qualifier("bySubjectTeacher")
+    @Autowired
+    UseCaseHandler<List<Teacher>, RetrieveTeacher> retrieveBySubjectTeacherUseCaseHandler;
+
     @GetMapping("id={id}")
     public ResponseEntity<Teacher> getTeacher(@PathVariable Long id) throws Exception {
         return ResponseEntity.ok(retrieveTeacherUseCaseHandler.handle(
@@ -34,5 +38,10 @@ public class TeacherController {
     public ResponseEntity<List<Teacher>> getTeacherByEmail(@PathVariable String email) throws Exception {
         return ResponseEntity.ok(retrieveByEmailTeacherUseCaseHandler.handle(
                 RetrieveTeacher.builder().email(email).build()));
+    }
+    @GetMapping("subjectId={subjectId}")
+    public ResponseEntity<List<Teacher>> getTeacherByEmail(@PathVariable Long subjectId) throws Exception {
+        return ResponseEntity.ok(retrieveBySubjectTeacherUseCaseHandler.handle(
+                RetrieveTeacher.builder().subjectId(subjectId).build()));
     }
 }

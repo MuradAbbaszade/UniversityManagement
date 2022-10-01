@@ -2,6 +2,8 @@ package com.company.adapters.teacher.jpa;
 
 import com.company.adapters.role.jpa.repository.RoleJpaRepository;
 import com.company.adapters.student.jpa.entity.StudentEntity;
+import com.company.adapters.subject.jpa.entity.SubjectEntity;
+import com.company.adapters.subject.jpa.repository.SubjectJpaRepository;
 import com.company.adapters.teacher.jpa.entity.TeacherEntity;
 import com.company.adapters.teacher.jpa.repository.TeacherJpaRepository;
 import com.company.student.model.Student;
@@ -24,6 +26,7 @@ import java.util.List;
 public class TeacherAdapter implements TeacherPort {
 
     private final TeacherJpaRepository teacherJpaRepository;
+    private final SubjectJpaRepository subjectJpaRepository;
     private final RoleJpaRepository roleJpaRepository;
     @Override
     public Teacher retrieve(RetrieveTeacher retrieveTeacher) throws Exception {
@@ -66,6 +69,18 @@ public class TeacherAdapter implements TeacherPort {
         teacherEntity.setPassword(passwordEncoder().encode(saveTeacher.getPassword()));
         teacherEntity.setRoleEntity(roleJpaRepository.findById(saveTeacher.getRoleId()).get());
         return teacherJpaRepository.save(teacherEntity).toModel();
+    }
+
+    @Override
+    public List<Teacher> retrieveBySubject(RetrieveTeacher retrieveTeacher) throws Exception {
+        SubjectEntity subjectEntity = subjectJpaRepository.findById(retrieveTeacher.getSubjectId())
+                    .orElseThrow(() -> new Exception("Teacher not found"));
+        List<TeacherEntity> teacherEntities = subjectEntity.getTeacherEntityList();
+        List<Teacher> teachers = new ArrayList<>();
+        for(TeacherEntity teacherEntity : teacherEntities){
+            teachers.add(teacherEntity.toModel());
+        }
+        return teachers;
     }
 
     public PasswordEncoder passwordEncoder(){

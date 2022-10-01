@@ -18,7 +18,7 @@ public class SubjectEntity extends AbstractEntity {
     @Column(name="name")
     private String name;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "subjectEntityList")
     private List<TeacherEntity> teacherEntityList;
 
     public Subject toModel(){

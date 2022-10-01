@@ -12,4 +12,5 @@ public interface TeacherPort {
     List<Teacher> retrieveByEmail(RetrieveTeacher retrieveTeacher) throws Exception;
     Teacher delete(DeleteTeacher deleteTeacher) throws Exception;
     Teacher save(SaveTeacher saveTeacher);
+    List<Teacher> retrieveBySubject(RetrieveTeacher retrieveTeacher) throws  Exception;
 }

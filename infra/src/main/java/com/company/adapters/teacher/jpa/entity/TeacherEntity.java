@@ -26,6 +26,10 @@ public class TeacherEntity extends AbstractEntity {
     private RoleEntity roleEntity;
 
     @ManyToMany
+    @JoinTable(
+            name = "teacher_subject",
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private List<SubjectEntity> subjectEntityList;
 
     public Teacher toModel(){
