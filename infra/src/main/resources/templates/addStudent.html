@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Student</title>
+    <script type="text/javascript">
+    function send(){
+    var formData = JSON.stringify($("#saveStudent").serializeArray());
+    $.ajax({
+    type: "POST",
+    url: "/admin/student/save",
+    data: formData,
+    success: function(){},
+    dataType: "json",
+    contentType : "application/json"
+    });
+    }
+</script>
+</head>
+<body>
+<form id="saveStudent">
+    <input placeholder="Name" id="name" name="name" type="text">
+    <input placeholder="Surname" id="surname" name="surname" type="text">
+    <input placeholder="Email" id="email" name="email" type="email">
+    <input placeholder="Password" id="password" name="password" type="password">
+    <input placeholder="Acceptance Point" id="acceptancePoint" name="acceptancePoint" type="number">
+    <input placeholder="Group Id" id="groupId" name="groupId" type="number">
+    <input placeholder="Role Id" id="roleId" name="roleId" type="number">
+    <button id="submit" onclick="send()">Submit</button>
+</form>
+</body>
+</html>

@@ -25,8 +25,12 @@ public class StudentController {
     @Autowired
     UseCaseHandler<List<Student>,RetrieveStudent> retrieveByEmailStudentUseCaseHandler;
 
+    @Qualifier("byGroupStudent")
+    @Autowired
+    UseCaseHandler<List<Student>, RetrieveStudent> retrieveByGroupUseCaseHandler;
+
     @GetMapping("id={id}")
-    public ResponseEntity<Student> getStudent(@PathVariable Long id) throws Exception {
+    public ResponseEntity<Student> getStudentById(@PathVariable Long id) throws Exception {
         return ResponseEntity.ok(retrieveStudentUseCaseHandler.handle(
                 RetrieveStudent.builder().id(id).build()));
     }
@@ -34,6 +38,11 @@ public class StudentController {
     public ResponseEntity<List<Student>> getStudentByEmail(@PathVariable String email) throws Exception {
         return ResponseEntity.ok(retrieveByEmailStudentUseCaseHandler.handle(
                 RetrieveStudent.builder().email(email).build()));
+    }
+    @GetMapping("groupId={groupId}")
+    public ResponseEntity<List<Student>> getStudentByGroup(@PathVariable Long groupId) throws Exception {
+        return ResponseEntity.ok(retrieveByGroupUseCaseHandler.handle(
+                RetrieveStudent.builder().groupId(groupId).build()));
     }
 
 }

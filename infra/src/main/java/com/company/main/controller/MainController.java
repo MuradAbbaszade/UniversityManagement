@@ -70,4 +70,8 @@ public class MainController {
         }
         return "main";
     }
+    @GetMapping("addStudent")
+    public String getAddStudentPage(){
+        return "addStudent";
+    }
 }

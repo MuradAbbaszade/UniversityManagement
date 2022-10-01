@@ -25,6 +25,7 @@ public class StudentAdminController {
     @Autowired
     UseCaseHandler<Student, RetrieveStudent> retrieveStudentUseCaseHandler;
 
+
     @PostMapping("save")
     public ResponseEntity<Student> save(@RequestBody StudentSaveRequest studentSaveRequest) throws Exception {
         return ResponseEntity.ok(saveStudentUseCaseHandler.handle(
@@ -33,10 +34,7 @@ public class StudentAdminController {
     }
     @PostMapping("delete")
     public ResponseEntity<Student> delete(@RequestParam Long id) throws Exception {
-        Student student = retrieveStudentUseCaseHandler.handle(
-                RetrieveStudent.builder().id(id).build()
-        );
-        deleteStudentUseCaseHandler.handle(DeleteStudent.builder().id(id).build());
-        return ResponseEntity.ok(student);
+        return ResponseEntity.ok(deleteStudentUseCaseHandler.handle(
+                DeleteStudent.builder().id(id).build()));
     }
 }

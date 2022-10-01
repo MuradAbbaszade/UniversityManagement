@@ -8,13 +8,14 @@ import lombok.Data;
 @Data
 @Builder
 public class StudentSaveRequest {
-
-    @NotNull
-    private Long id;
     @NotNull
     private String name;
     @NotNull
     private String surname;
+    @NotNull
+    private String email;
+    @NotNull
+    private String password;
     @NotNull
     private Integer acceptancePoint;
     @NotNull
@@ -24,11 +25,13 @@ public class StudentSaveRequest {
 
     public SaveStudent toUseCase(){
         return SaveStudent.builder()
-                .id(id)
                 .name(name)
                 .surname(surname)
+                .email(email)
+                .password(password)
                 .acceptancePoint(acceptancePoint)
                 .groupId(groupId)
+                .roleId(roleId)
                 .build();
     }
 }

@@ -9,17 +9,20 @@ import lombok.Data;
 @Builder
 public class TeacherSaveRequest {
     @NotNull
-    private Long id;
-    @NotNull
     private String name;
     @NotNull
     private String surname;
+    @NotNull
+    private String email;
+    @NotNull
+    private String password;
 
     public SaveTeacher toUseCase(){
         return SaveTeacher.builder()
-                .id(id)
                 .name(name)
                 .surname(surname)
+                .email(email)
+                .password(password)
                 .build();
     }
 }

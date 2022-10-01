@@ -9,4 +9,5 @@ import lombok.Data;
 public class RetrieveStudent implements UseCase {
     private Long id;
     private String email;
+    private Long groupId;
 }

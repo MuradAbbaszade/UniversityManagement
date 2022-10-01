@@ -48,6 +48,21 @@ public class StudentAdapter implements StudentPort {
     }
 
     @Override
+    public List<Student> retrieveByGroup(RetrieveStudent retrieveStudent) throws Exception {
+        if(retrieveStudent.getGroupId()!=null && !(retrieveStudent.getEmail().isEmpty())){
+            return Arrays.asList(studentJpaRepository.findByGroupId(retrieveStudent.getGroupId())
+                    .map(StudentEntity::toModel)
+                    .orElseThrow(() -> new Exception("Student not found")));
+        }
+        List<StudentEntity> studentEntities = studentJpaRepository.findAll();
+        List<Student> students = new ArrayList<>();
+        for(StudentEntity studentEntity : studentEntities){
+            students.add(studentEntity.toModel());
+        }
+        return students;
+    }
+
+    @Override
     public Student delete(DeleteStudent deleteStudent) throws Exception {
         Student student = studentJpaRepository.findById(deleteStudent.getId())
                 .map(StudentEntity::toModel)
