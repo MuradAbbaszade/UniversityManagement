@@ -1,5 +1,5 @@
-# UniversityManagement
-University Management with Spring and Java (Hexagonal Architecture)
+# UniversitySystem
+University System with Spring and Java (Hexagonal Architecture)
 
 ## 💡 Features
 - Auth
